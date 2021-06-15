@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Editor</title>
+    <link rel="stylesheet" th:href="@{/static/css/styleOld.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<!-- Panel Navbar-->
+<p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Vkachalke</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/main">Notes</a>
+            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">User list</a>
+                </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+<body>
+User Editor
+<form th:action="@{/user}" method="post">
+    <input type="text" name="name" th:value="${userEdit.name}">
+    <div th:each="role:${roles}">
+        <label><input th:type="checkbox"
+                      th:name="${role}"
+                      th:value="${role}"
+                      th:text="${role}"
+                      th:checked="${#lists.contains(userEdit.roles, role)}">
+        </label>
+    </div>
+    <input type="hidden" th:value="${userEdit.id}" name="userId">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <button type="submit">Save</button>
+</form>
+</form>
+</body>
+    </div>
+</html>
