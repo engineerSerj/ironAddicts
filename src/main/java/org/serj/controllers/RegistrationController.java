@@ -17,14 +17,14 @@ public class RegistrationController {
     }
     @GetMapping("/registration")
     public String registration() {
-        return "registrationOLD";
+        return "registration";
     }
 
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
       if(!userService.addUser(user)){
           model.addAttribute("message","userExist");
-          return "registrationOLD";
+          return "registration";
       }
 
         return "redirect:/login";
