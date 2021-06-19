@@ -71,4 +71,12 @@ public class Note {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
