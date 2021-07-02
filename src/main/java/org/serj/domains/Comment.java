@@ -32,6 +32,10 @@ public class Comment {
         this.topic = topic;
     }
 
+    public String getAuthorName(){
+        return author!= null?author.getName() : "<none>";
+    }
+
     public String getText() {
         return text;
     }

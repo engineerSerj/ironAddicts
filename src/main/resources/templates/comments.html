@@ -2,18 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="zxx">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Gym Template">
     <meta name="keywords" content="Gym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gym | Template</title>
+    <title>Все записи</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
@@ -24,6 +20,15 @@
     <link rel="stylesheet" href="/static/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/styleForum.css" type="text/css">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="/static/fonts/icons/main/mainfont/style.css">
+    <link rel="stylesheet" href="/static/fonts/icons/font-awesome/css/font-awesome.min.css">
+
+    <!-- Vendor -->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/v3/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendor/bootstrap/v4/bootstrap-grid.css">
 </head>
 
 <body>
@@ -43,21 +48,16 @@
     </div>
     <nav class="canvas-menu mobile-menu">
         <ul>
-            <li><a href="index.html">На главную</a></li>
+            <li><a href="/">На главную</a></li>
             <li><a href="/about-us">О нас</a></li>
-            <li><a href="team.html">Our Team</a></li>
-            <li><a href="#">Pages</a>
+            <li><a href="#">Разное</a>
                 <ul class="dropdown">
-                    <li><a href="about-us.html">About us</a></li>
-                    <li><a href="class-timetable.html">Classes timetable</a></li>
                     <li><a href="bmi-calculator.html">Bmi calculate</a></li>
                     <li><a href="team.html">Our team</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="blog.html">Our blog</a></li>
                     <li><a href="404.html">404</a></li>
                 </ul>
             </li>
-            <li><a href="/main">Форум</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -74,9 +74,9 @@
 <header class="header-section">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3" style="margin-top: -3%;">
+            <div class="col-lg-3"style="margin-top: -3%;">
                 <div class="logo">
-                    <a href="/">
+                    <a href="/greeting">
                         <img src="/static/img/logo.png" alt="">
                     </a>
                 </div>
@@ -84,12 +84,11 @@
             <div class="col-lg-6">
                 <nav class="nav-menu">
                     <ul>
-                        <li><a href="index.html">На главную</a></li>
+                        <li><a href="/">На главную</a></li>
                         <li><a href="/about-us">О нас</a></li>
                         <li><a href="#">Разное</a>
                             <ul class="dropdown">
                                 <li><a href="bmi-calculator.html">Bmi calculate</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
                                 <li><a href="blog.html">Our blog</a></li>
                                 <li><a href="404.html">404</a></li>
                             </ul>
@@ -118,63 +117,59 @@
 </header>
 <!-- Header End -->
 
-<!-- Hero Section Begin -->
-<section class="hero-section">
-    <div class="hs-slider owl-carousel">
-        <div class="hs-item set-bg" data-setbg="/static/img/hero/topics.jpg">
-            <div class="container">
-                <div class="row">
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section-2 set-bg" data-setbg="/static/img/hero/cyber.jpeg">
+    <div class="container">
+        <div class="row">
 
+            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+               aria-controls="collapseExample">
+                Add new note
+            </a>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <form th:method="GET" th:action="@{/main}" class="form-inline">
-                                <input type="text" name="filter" class="form-control" th:value="${filter}"
-                                       placeholder="Search by tag"/>
-                                <button type="submit" class="btn btn-primary ml-2">
-                                    Search
-                                </button>
-                            </form>
+            <div class="collapse" id="collapseExample">
+                <div class="form-group mt-3">
+                    <form th:method="POST" th:action="@{/new_comment}" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="text" name="text" class="form-control" placeholder="Введите сообщение"/>
                         </div>
-                    </div>
-
-                    <a class="b1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                       aria-controls="collapseExample">
-                        Add new note
-                    </a>
-                    <hr>
-                    <a  href="/newTopic">
-                    new Top
-                    </a>
-                    <hr/>
-
-
-                    <div class="card-columns">
-                        <div th:each="note : ${notes}" class="card my-3">
-                            <div th:if="${note.filename}">
-                                <img th:src="@{img/uploads/{file}(file=${note.getFilename()})}" class="card-img-top">
-                            </div>
-                            <div class="m-2">
-                                <span th:text="${note.getText()}"></span>
-                                <i th:text="${note.getTag()}"></i>
-                            </div>
-                            <div class="card-footer text-muted">
-                                <strong th:text="${note.getAuthorName()}"></strong>
-                            </div>
-                            <a th:href="@{/comments/{note}(note=${note.getId()})}">Смотреть топик</a>
-
+                        <div class="form-group">
+                            <input type="text" name="tag" class="form-control" placeholder="Тэг"/>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" name="file" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
+
+            <div class="card-columns">
+                <div th:each="comment : ${comments}" class="card my-3">
+                    <div th:if="${comment.filename}">
+                        <img th:src="@{img/uploads/{file}(file=${comment.getFilename()})}" class="card-img-top">
+                    </div>
+                    <div class="m-2">
+                        <span th:text="${comment.getText()}"></span>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <strong th:text="${comment.getAuthorName()}"></strong>
+                    </div>
+                    <a href="#">Ответить</a>
 
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-<!-- Hero Section End -->
-
+<!-- Breadcrumb Section End -->
 
 <!-- Footer Section Begin -->
 <section class="footer-section">
@@ -220,6 +215,21 @@
 <script src="/static/js/jquery.slicknav.js"></script>
 <script src="/static/js/owl.carousel.min.js"></script>
 <script src="/static/js/main.js"></script>
+ JS On
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+ JAVA SCRIPT
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/velocity/velocity.min.js"></script>
+<script src="/static/js/app.js"></script>
 
 
 </body>

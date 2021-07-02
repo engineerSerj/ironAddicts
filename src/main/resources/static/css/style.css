@@ -1242,7 +1242,12 @@ ol {
 -----------------------*/
 
 .breadcrumb-section {
-	height: 500px;
+	height: px;
+	padding-top: 230px;
+}
+
+.breadcrumb-section-2 {
+	height: 800px;
 	padding-top: 230px;
 }
 
